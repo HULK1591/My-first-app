@@ -1,18 +1,33 @@
 <label>Server Name</label>
 
-<input 
+<!-- This is is data dinding one way -->
+<!-- <input
     type="text"
     class="form-control"
-    (input)='onUpdateSererName($event)'>
+    (input)='onUpdateSererName($event)'> -->
 
-<button 
-    class="btn btn-primary" 
+<!-- Here we are using TWO WAY databinding by using
+ngModel -->
+<input
+    type="text"
+    class="form-control"
+    [(ngModel)]='serverName'>
+<!-- <p>{{ serverName }} </p> -->
+
+<button
+    class="btn btn-primary"
     [disabled] = '!allowNewServer'
     (click)='onCreateServer()'
     >Add Server
 </button>
 <!-- <p [innerText] = 'allowNewServer'></p> -->
-<p>{{ serverCreationStatus }}</p>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+
+<p *ngIf="serverCreated; else noServer">Server was created!. Server name is: {{serverName}} </p>
+
+<ng-template #noServer>
+  <p> No server was created! </p>
+</ng-template>
 
 <app-server></app-server>
 <app-server></app-server>
